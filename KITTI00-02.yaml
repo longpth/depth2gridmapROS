@@ -1,0 +1,36 @@
+#--------------------------------------------------------------------------------------------
+# Camera Parameters. Adjust them!
+#--------------------------------------------------------------------------------------------
+
+# Camera calibration and distortion parameters (OpenCV) 
+Camera.fx: 718.856
+Camera.fy: 718.856
+Camera.cx: 607.1928
+Camera.cy: 185.2157
+
+Camera.k1: 0.0
+Camera.k2: 0.0
+Camera.p1: 0.0
+Camera.p2: 0.0
+
+image_width: 416
+image_height: 128
+camera_name: monocular
+camera_matrix:
+  rows: 3
+  cols: 3
+  data: [241.674463, 0, 204.168010, 0, 246.284868, 59.000832, 0, 0, 1]
+distortion_model: plumb_bob
+distortion_coefficients:
+  rows: 1
+  cols: 5
+  data: [-0.449179, 0.300371, -0.002295, 0.006749, 0]
+rectification_matrix:
+  rows: 3
+  cols: 3
+  data: [1, 0, 0, 0, 1, 0, 0, 0, 1]
+projection_matrix:
+  rows: 3
+  cols: 4
+  data: [579.071289, 0, 300.542379, 0, 0, 606.336548, 247.186137, 0, 0, 0, 1, 0]
+

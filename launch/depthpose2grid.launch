@@ -1,0 +1,53 @@
+<launch>
+  
+  <!-- Publish point cloud from file -->
+  <node pkg="depth2gridmap" type="depth2gridmap" name="depth2gridmap" output="screen">
+    <!-- published topic              -->
+    <param name="topic_cloud"                      value="/point_cloud" />
+    <param name="topic_scan"                       value="/fake_scan" />
+    <param name="topic_grid"                       value="/grid" />
+    <param name="topic_campose"                    value="/campose" />
+    <!-- subcribed topic              -->
+    <param name="topic_rgb"                        value="/camera/rgb/image_color" />
+    <param name="topic_depth"                      value="/camera/depth/image_depth" />
+    <param name="topic_caminfo"                    value="/camera/rgb/camera_info" />
+    <!-- other                        -->
+    <param name="frame"                            value="world" />
+    <param name="rate"                             value="2.0"/>
+    <param name="subscriber_queue_size"            value="1.0"/>
+    <param name="zScaling"                         value="10000"/>
+    <param name="maxDepth"                         value="1.0"/>
+    <param name="maxDepthGrid"                     value="100"/>
+    <param name="gridReso"                         value="0.02"/>
+    <param name="gridWidth"                        value="5000"/>
+    <param name="gridHeight"                       value="5000"/>
+    <param name="useCamPose"                       value="1.0"/>
+    <!-- Camera calibration parameter -->
+    <param name="fx"                               value="718.856"/>
+    <param name="fy"                               value="718.856"/>
+    <param name="cx"                               value="607.1928"/>
+    <param name="cy"                               value="185.2157"/>
+    <param name="width"                            value="1241.0"/>
+    <param name="height"                           value="376.0"/>
+    <!--
+    <param name="fx"                               value="932.31743899"/>
+    <param name="fy"                               value="935.95155411"/>
+    <param name="cx"                               value="454.96161939"/>
+    <param name="cy"                               value="248.79242231"/>
+    <param name="width"                            value="640.0"  />
+    <param name="height"                           value="480.0"  />
+    -->
+  </node>
+    
+  <!-- Visualize the point cloud in rviz -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find depth2gridmap)/examples/depthpose2grid.rviz" />
+
+  <node name="img_pub" pkg="depth2gridmap" type="image_sequence_publisher.py" output="screen">
+    <param name="image_dir" value="/mnt/ubuntu_18.04/home/long/work/4.ROS/catkin_ws/src/depth2gridmap/data"/>
+    <param name="file_pattern" value="*.png"/>
+    <param name="camera_info_file" value="/mnt/ubuntu_18.04/home/long/work/4.ROS/catkin_ws/src/depth2gridmap/KITTI00-02.yaml"/>
+    <param name="frequency" value="1"/>
+    <param name="pose_file" value="/mnt/ubuntu_18.04/home/long/work/3.Datatset/data_odometry_poses/dataset/poses/00.txt"/>
+  </node>
+  
+</launch>
